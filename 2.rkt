@@ -1,9 +1,12 @@
 #lang racket
 
 (define (even-fibonacci-numbers upper-bound)
-  (define (iter sum a b)
-    (define c (+ a b))
-    (if (< c upper-bound) (if (even? c) (iter (+ sum c) b c) (iter sum b c)) sum))
-  (iter 0 0 1))
+  (define (iter a b results)
+    (let ([c (+ a b)])
+      (cond
+        [(>= c upper-bound) results]
+        [(even? c) (iter b c (cons c results))]
+        [else (iter b c results)])))
+  (iter 0 1 '()))
 
-(even-fibonacci-numbers 4000000)
+(apply + (even-fibonacci-numbers 4000000))
