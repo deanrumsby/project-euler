@@ -8,9 +8,10 @@
     (or (divides? n 3) (divides? n 5)))
   (define (iter n results)
     (let ([m (+ n 1)])
-      (if (< n upper-bound)
-          (if (multiple-of-3-or-5? n) (iter m (cons n results)) (iter m results))
-          results)))
+      (cond
+        [(>= n upper-bound) results]
+        [(multiple-of-3-or-5? n) (iter m (cons n results))]
+        [else (iter m results)])))
   (iter 1 '()))
 
 (apply + (multiples-of-3-or-5 1000))
