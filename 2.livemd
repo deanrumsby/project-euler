@@ -1,0 +1,25 @@
+# Problem 2: Even Fibonacci Numbers
+
+## Solution
+
+We will only be summing the even terms of the Fibonacci sequence, so we start by creating a helper function to filter with.
+
+```elixir
+defmodule Problem2 do
+  def even?(n), do: rem(n, 2) == 0
+end
+```
+
+We can use `Stream.unfold/2` to create our stream of Fibonacci numbers, and by pattern matching, we can terminate the stream once we reach values greater than 4 million. 
+Now we just filter on the even numbers and take the sum to finish.
+
+```elixir
+import Problem2
+
+Stream.unfold({0, 1}, fn
+  {_, fib_b} when fib_b > 4_000_000 -> nil
+  {fib_a, fib_b} -> {fib_b, {fib_b, fib_a + fib_b}}
+end)
+|> Stream.filter(&even?/1)
+|> Enum.sum()
+```
