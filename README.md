@@ -1,5 +1,5 @@
 # Project Euler
 
-These are my solutions for Project Euler.
-I've chosen to write these in Racket (Lisp) to get more familiarity with functional programming languages,
-as it seems they are well suited for these style of problems.
+These are my solutions for Project Euler, written in Elixir.
+
+You can run the code snippets if you open the project using [Livebook](https://livebook.dev).
